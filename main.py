@@ -9,7 +9,11 @@ import os
 
 JOKE = "My resume says I'm a team player. What it doesn't say is that the team is me, myself, and the group chat I mute."
 
-OUTPUT_PATH = "/output/entry.txt"
+# The gate requires 1-280 UTF-8 characters, a single line, not only whitespace.
+assert 1 <= len(JOKE) <= 280, "joke must be 1-280 characters"
+assert "\n" not in JOKE and JOKE.strip(), "joke must be a single non-blank line"
+
+OUTPUT_PATH = os.path.join(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"), "entry.txt")
 
 
 def main():
